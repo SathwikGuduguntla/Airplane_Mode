@@ -1,45 +1,44 @@
 {
  "actions": [],
- "autoname": "format:{airline}-{#####} ",
- "creation": "2026-01-07 11:22:32.765812",
+ "allow_rename": 1,
+ "autoname": "prompt",
+ "creation": "2026-01-07 11:27:04.127427",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "airline",
-  "model",
-  "capacity"
+  "code",
+  "city",
+  "country"
  ],
  "fields": [
   {
-   "fieldname": "model",
+   "fieldname": "code",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Model",
+   "label": "Code ",
    "reqd": 1
   },
   {
-   "fieldname": "capacity",
-   "fieldtype": "Int",
-   "label": "Capacity",
-   "non_negative": 1,
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "City ",
    "reqd": 1
   },
   {
-   "fieldname": "airline",
-   "fieldtype": "Link",
-   "label": "Airline",
-   "options": "Airline",
+   "fieldname": "country",
+   "fieldtype": "Data",
+   "label": "Country ",
    "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-01-12 18:08:16.695009",
+ "modified": "2026-01-10 13:34:47.719376",
  "modified_by": "Administrator",
  "module": "Airplane Mode",
- "name": "Airplane",
- "naming_rule": "Expression",
+ "name": "Airport",
+ "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [
   {

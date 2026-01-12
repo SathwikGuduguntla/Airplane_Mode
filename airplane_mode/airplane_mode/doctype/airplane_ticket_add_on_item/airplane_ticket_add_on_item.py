@@ -1,9 +1,9 @@
 # Copyright (c) 2026, sathwik and contributors
 # For license information, please see license.txt
 
-import frappe
+# import frappe
 from frappe.model.document import Document
 
 
-class Airplane(Document):
+class AirplaneTicketAddonItem(Document):
 	pass
