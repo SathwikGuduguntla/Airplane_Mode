@@ -1,59 +1,43 @@
 {% extends "templates/web.html" %}
 
 {% block page_content %}
-{# Force Frappe to realize this is a unique document context #}
-{% set flight_doc = frappe.get_doc("Airplane Flight", doc.name) %}
+<div class="py-5">
 
-<div class="container py-5">
-
-    {# Fetch the airline name specifically for THIS flight's airplane #}
-    {% set airline_name = "Unknown Airline" %}
-    {% if flight_doc.airplane %}
-    {% set airline_name = frappe.db.get_value("Airplane", flight_doc.airplane, "airline") %}
+    {% set airline = "Unknown Airline" %}
+    {% if doc.airplane %}
+        {% set airline = frappe.db.get_value("Airplane", doc.airplane, "airline") or airline %}
     {% endif %}
 
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent p-0 mb-4">
+        <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/flights">All Flights</a></li>
-            {# This should display the unique ID of the flight you clicked #}
-            <li class="breadcrumb-item active text-muted">{{ flight_doc.name }}</li>
+            <li class="breadcrumb-item active">{{ doc.name }}</li>
         </ol>
     </nav>
 
-    <div class="header-section mb-4">
-        <h1 class="display-4 font-weight-bold">{{ airline_name }}</h1>
-        <h3 class="text-primary">
-            {{ flight_doc.source_airport_code }} 
-            <span class="text-dark">→</span> 
-            {{ flight_doc.destination_airport_code }}
-        </h3>
-    </div>
+    <h1 class="display-4">{{ airline }}</h1>
+    <h3 class="text-primary">
+        {{ doc.source_airport_code }} → {{ doc.destination_airport_code }}
+    </h3>
 
-    <div class="card shadow-sm border-0 my-4" style="border-radius: 15px;">
-        <div class="card-body p-4">
-            <div class="row">
-                <div class="col-md-6 mb-3 mb-md-0 border-right">
-                    <h6 class="text-uppercase text-muted small">Departure</h6>
-                    <p class="h5 mb-0">
-                        {{ frappe.utils.format_date(flight_doc.date_of_departure, "d MMMM, YYYY") }}
-                    </p>
-                    <p class="text-secondary mb-0">at {{ flight_doc.time_of_departure }}</p>
-                </div>
-                <div class="col-md-6">
-                    <h6 class="text-uppercase text-muted small">Duration</h6>
-                    <p class="h5 mb-0">
-                        {{ frappe.utils.format_duration(flight_doc.duration) }}
-                    </p>
-                </div>
-            </div>
+    <div class="card my-4">
+        <div class="card-body">
+            <p>
+                <strong>Departure:</strong>
+                {{ frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY") }}
+                at {{ doc.time_of_departure }}
+            </p>
+            <p>
+                <strong>Duration:</strong>
+                {{ frappe.utils.format_duration(doc.duration) }}
+            </p>
         </div>
     </div>
 
-    <div class="mt-5">
-        <a href="/flight-booking-web-form?flight={{ flight_doc.name }}"
-           class="btn btn-primary btn-lg px-5 shadow-sm">
-            Book Flight Ticket
-        </a>
-    </div>
+    <a href="/flight-booking-web-form?flight={{ doc.name }}"
+       class="btn btn-primary btn-lg">
+        Book Flight Ticket
+    </a>
+
 </div>
 {% endblock %}

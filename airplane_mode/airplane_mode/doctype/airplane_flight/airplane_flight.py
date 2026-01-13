@@ -3,11 +3,9 @@
 
 
 
-import frappe
+
 from frappe.website.website_generator import WebsiteGenerator
 
 class AirplaneFlight(WebsiteGenerator):
-    
-    def get_context(self, context):
-      
-        pass
+    def on_submit(self):
+        self.status = "Completed"
