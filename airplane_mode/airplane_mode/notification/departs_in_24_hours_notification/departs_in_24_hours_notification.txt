@@ -1,0 +1,1 @@
+Flight {{ doc.name }} is scheduled to depart in 24 hours on {{ frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY") }} at {{ doc.time_of_departure }}..
